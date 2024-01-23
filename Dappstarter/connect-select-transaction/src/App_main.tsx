@@ -1,14 +1,18 @@
-import { NearWalletConnector } from "@/components/NearWalletSelector";
-import type { Metadata } from "next";
+import { MintbaseWalletContextProvider } from "@mintbase-js/react";
+import "./App.css";
+import { NearWalletConnector } from "./NearWalletConnector";
+import "./shims";
 
-export const metadata: Metadata = {
-  title: "Mintbase Starter with Next.js",
-  description: "Simple Login with Next.js 14",
-};
+function App() {
 
-export default function Home() {
+  const MintbaseWalletSetup = {
+    contractAddress: "hellovirtualworld.mintspace2.testnet",
+    network: "testnet",
+    callbackUrl: "http://localhost:3000",
+  };
+
   return (
-    <>
+    <MintbaseWalletContextProvider {...MintbaseWalletSetup}>
       <main className="flex flex-col items-center justify-center mt-2">
         <div className="mx-6 sm:mx-24 mt-4 mb-4">
           <div className="w-full flex flex-col justify-center items-center">
@@ -21,6 +25,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-    </>
+    </MintbaseWalletContextProvider>
   );
 }
+
+export default App;
